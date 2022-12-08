@@ -62,6 +62,9 @@ class Patient {
     }
     if(this.patientColor == color(0, 255, 0)){
       this.isHealthy = true;
+      this.currentDoctor.currentPatient=null;
+      this.currentDoctor=null;
+      
       //println("is healthy");
     }
   }

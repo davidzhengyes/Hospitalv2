@@ -35,7 +35,7 @@ void draw(){
   //printArray(leftGrid);
   Boolean leftSeatAvailable = checkForOpenSeats(leftGrid);
   Boolean rightSeatAvailable = checkForOpenSeats(rightGrid);
-  Patient newPatient = new Patient (0,0,int(random(1,100)), false,false,false,300,800);
+  Patient newPatient = new Patient (0,0,int(random(1,99)), false,false,false,300,800);
   if (frameCount%20==0 && (rightSeatAvailable && leftSeatAvailable)){
     allPatients.add(newPatient);
   }
@@ -223,10 +223,10 @@ void draw(){
     else if(patient.isHealthy == true){
       patient.drawPa();
       if (patient.patientX != building.pathWidth/2 + building.xWidth){
-        if (patient.patientX < patient.currentDoctor.xPos && patient.reachedDoctor == true){
+        if (patient.patientX >300 ){
           patient.patientX--;
         }
-        else if (patient.patientX > patient.currentDoctor.xPos && patient.reachedDoctor == true){
+        else if (patient.patientX < 300){
           patient.patientX++;
         }
       }
