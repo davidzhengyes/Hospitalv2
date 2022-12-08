@@ -32,7 +32,10 @@ void setup(){
 
 
 void draw(){
-  //printArray(leftGrid);
+  if (frameCount==1600){
+  printArray(leftGrid);
+  }
+  
   Boolean leftSeatAvailable = checkForOpenSeats(leftGrid);
   Boolean rightSeatAvailable = checkForOpenSeats(rightGrid);
   Patient newPatient = new Patient (0,0,int(random(1,99)), false,false,false,300,800);
@@ -53,12 +56,12 @@ void draw(){
   cgLeft.display();
   cgRight.display();
   building.drawBuilding();
-  
+  //println(allDoctors.get(0).currentPatient);
   //didn't use Doctor doctor:allDoctors as an iterator because of ConcurrentModificationException
   for(int i=0;i<allDoctors.size();i++){ 
     Doctor doctor = allDoctors.get(i);
     
-    //randomly assigning patients to doctors;
+    
     doctor.drawDr();
     if (doctor.currentPatient == null){ //if room is empty
       
@@ -69,8 +72,19 @@ void draw(){
         if (allPatients.get(g).currentDoctor == null){
           allPatients.get(g).currentDoctor = doctor;
           doctor.currentPatient = allPatients.get(g);
+          
+          try{
+            if (allPatients.get(g).searchingLeft==true){
+              leftGrid[allPatients.get(g).chairIndex]=false;
+            }
+            else{
+              rightGrid[allPatients.get(g).chairIndex]=false;
+            }
+          }
+          catch(Exception e){
+          }
           break;
-        //print(doctor.currentPatient.patientX);
+
         }
       }
     }
