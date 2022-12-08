@@ -8,6 +8,7 @@ ChairGrid cgLeft = new ChairGrid(50,666,12);
 ChairGrid cgRight = new ChairGrid(370,666,12);
 Boolean[] leftGrid = new Boolean[cgLeft.chairNum*2];
 Boolean[] rightGrid = new Boolean [cgRight.chairNum*2];
+Boolean initialFill = false;
 
 
 Building building = new Building (4,100,600,800,20);
@@ -32,13 +33,27 @@ void setup(){
 
 
 void draw(){
-  //checkForOpenSeats();
-  
-  if (frameCount%20==0){
-    Patient newPatient = new Patient (0,0,int(random(1,100)), false,false,false,300,800);
+  Boolean leftSeatAvailable = checkForOpenSeats(leftGrid);
+  Boolean rightSeatAvailable = checkForOpenSeats(rightGrid);
+  Patient newPatient = new Patient (0,0,int(random(1,100)), false,false,false,300,800);
+  if (frameCount%20==0 && (leftSeatAvailable && rightSeatAvailable) && initialFill==false){
     allPatients.add(newPatient);
   }
-  //println(allPatients.get(0).currentDoctor);
+  
+  if(!leftSeatAvailable || !rightSeatAvailable){
+    initialFill=true;
+    println(frameCount);
+  }
+  
+  if (initialFill==true && leftSeatAvailable){
+    newPatient.searchingLeft=true;
+    allPatients.add(newPatient);
+  }
+  else if (initialFill=true && rightSeatAvailable){
+    newPatient.searchingLeft=false;
+    allPatients.add(newPatient);
+  }
+
   background(210);
   cgLeft.display();
   cgRight.display();
@@ -74,6 +89,8 @@ void draw(){
   
   //not using Patient patient:allPatients same reason as doctors
   for (int i=0; i<allPatients.size(); i++){
+    
+    checktoDelete();
     
     Boolean[] gridToSearch;
     Patient patient = allPatients.get(i);
@@ -226,18 +243,28 @@ void draw(){
 }
 
 
-Boolean[] checkForOpenSeats(Boolean [] nigar){
+Boolean checkForOpenSeats(Boolean [] grid){
   for (int i=0;i<leftGrid.length;i++){
-    if (leftGrid[i]==false ){
-      return nigar;
+    if (grid[i]==false ){
+      return true;
     }
-    else if (rightGrid[i]==false){
-      return nigar;
+    else if (grid[i]==false){
+      return true;
     }
   }
-  return null;
+  println(frameCount);
+  return false;
+  
 }
 
+
+void checktoDelete(){
+  for(int i=0;i<allPatients.size();i++){
+    if (allPatients.get(i).patientY<0){
+      allPatients.remove(i);
+    }
+  }
+}
 
 void reset(){
   noLoop();
