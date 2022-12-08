@@ -8,7 +8,6 @@ ChairGrid cgLeft = new ChairGrid(50,666,12);
 ChairGrid cgRight = new ChairGrid(370,666,12);
 Boolean[] leftGrid = new Boolean[cgLeft.chairNum*2];
 Boolean[] rightGrid = new Boolean [cgRight.chairNum*2];
-Boolean initialFill = false;
 
 
 Building building = new Building (4,100,600,800,20);
@@ -33,26 +32,22 @@ void setup(){
 
 
 void draw(){
+  //printArray(leftGrid);
   Boolean leftSeatAvailable = checkForOpenSeats(leftGrid);
   Boolean rightSeatAvailable = checkForOpenSeats(rightGrid);
   Patient newPatient = new Patient (0,0,int(random(1,100)), false,false,false,300,800);
-  if (frameCount%20==0 && (leftSeatAvailable && rightSeatAvailable) && initialFill==false){
+  if (frameCount%20==0 && (rightSeatAvailable && leftSeatAvailable)){
     allPatients.add(newPatient);
   }
-  
-  if(!leftSeatAvailable || !rightSeatAvailable){
-    initialFill=true;
-    println(frameCount);
-  }
-  
-  if (initialFill==true && leftSeatAvailable){
+  else if (frameCount%20==0 && (leftSeatAvailable)){
     newPatient.searchingLeft=true;
     allPatients.add(newPatient);
   }
-  else if (initialFill=true && rightSeatAvailable){
+  else if (frameCount%20==0 && rightSeatAvailable){
     newPatient.searchingLeft=false;
     allPatients.add(newPatient);
   }
+
 
   background(210);
   cgLeft.display();
@@ -252,7 +247,6 @@ Boolean checkForOpenSeats(Boolean [] grid){
       return true;
     }
   }
-  println(frameCount);
   return false;
   
 }
