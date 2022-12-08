@@ -1,0 +1,134 @@
+//Global Variables
+ArrayList<Doctor> allDoctors = new ArrayList<Doctor>();
+ArrayList<Patient> allPatients = new ArrayList<Patient>();
+import g4p_controls.*;
+PImage img;
+
+ChairGrid cgridLeft = new ChairGrid(50,666,13);
+ChairGrid cgRight = new ChairGrid(370,666,13);
+
+
+Building building = new Building (4,100,600,800,50);
+void setup(){
+  //img = loadImage ("yep.jpg");
+  size(600,800);
+  
+ 
+  
+  Patient ss = new Patient (0,0,99, false,false,false,300,700);
+  allPatients.add(ss);
+  
+  createGUI();
+  building.createBuilding();
+
+}
+
+
+void draw(){
+  
+  if (frameCount%20==0){
+    Patient newPatient = new Patient (0,0,int(random(1,100)), false,false,false,300,800);
+    allPatients.add(newPatient);
+  }
+  //println(allPatients.get(0).currentDoctor);
+  background(210);
+  cgridLeft.display();
+  cgRight.display();
+  building.drawBuilding();
+  
+  //didn't use Doctor doctor:allDoctors as an iterator because of ConcurrentModificationException
+  for(int i=0;i<allDoctors.size();i++){ 
+    
+    //randomly assigning patients to doctors;
+    allDoctors.get(i).drawDr();
+    if (allDoctors.get(i).currentPatient == null){ //if room is empty
+      
+      Patient currPat = allPatients.get(int(random(allPatients.size())));
+      //pick random patient
+      if (currPat.currentDoctor == null){
+        currPat.currentDoctor = allDoctors.get(i);
+        allDoctors.get(i).currentPatient = currPat;
+      //print(doctor.currentPatient.patientX);
+      }
+    }
+    
+    else{
+      if (allDoctors.get(i).currentPatient.reachedDoctor){
+        allDoctors.get(i).healPatient();
+      }
+    }
+  }
+  
+  //not using Patient patient:allPatients same reason as doctors
+  for (int i=0; i<allPatients.size(); i++){
+    
+    allPatients.get(i).updateColor();
+    if(allPatients.get(i).isHealthy == false){//need if here, if patient is not already healed
+      allPatients.get(i).drawPa();
+      
+      allPatients.get(i).timeSinceEntered++;
+      
+      if (allPatients.get(i).currentDoctor != null){
+        
+        if (allPatients.get(i).patientY == allPatients.get(i).currentDoctor.yPos){
+          //if patient same height as doctor
+          if (abs(allPatients.get(i).patientX - allPatients.get(i).currentDoctor.xPos)==15){
+            allPatients.get(i).reachedDoctor = true;
+          }
+          if (allPatients.get(i).patientX < allPatients.get(i).currentDoctor.xPos && allPatients.get(i).reachedDoctor == false){
+            allPatients.get(i).patientX++;
+          }
+          else if (allPatients.get(i).patientX > allPatients.get(i).currentDoctor.xPos && allPatients.get(i).reachedDoctor == false){
+            allPatients.get(i).patientX--;
+          }
+          
+          
+        }
+        else{
+          //if not at same height keep going up
+          allPatients.get(i).patientY--;
+        }
+        
+      }
+
+      else{
+        allPatients.get(i).patientY--;
+
+      else{//(if patient does not currently have a doctor)
+        //allPatients.get(i).patientY--;
+        if (allPatients.get(i).patientY==700){
+          allPatients.get(i).patientX++;
+        }
+        else{
+          allPatients.get(i).patientY--;
+        }
+
+      }
+    }
+    else if(allPatients.get(i).isHealthy == true){
+      allPatients.get(i).drawPa();
+      if (allPatients.get(i).patientX != building.pathWidth/2 + building.xWidth){
+        if (allPatients.get(i).patientX < allPatients.get(i).currentDoctor.xPos && allPatients.get(i).reachedDoctor == true){
+          allPatients.get(i).patientX--;
+        }
+        else if (allPatients.get(i).patientX > allPatients.get(i).currentDoctor.xPos && allPatients.get(i).reachedDoctor == true){
+          allPatients.get(i).patientX++;
+        }
+      }
+      else{
+       allPatients.get(i).patientY--; 
+      }
+    }
+  }
+}
+
+
+
+void reset(){
+  noLoop();
+  allDoctors = new ArrayList<Doctor>();
+  allPatients = new ArrayList<Patient>();
+  building.createBuilding();
+  allPatients.add(new Patient (0,0,99, false,false,false,300,700));
+  loop();
+}
