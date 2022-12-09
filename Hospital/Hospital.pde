@@ -156,7 +156,7 @@ void draw(){
       patient.timeSinceEntered++;
       
       if (patient.currentDoctor != null){
-        
+       if (patient.patientX == building.pathWidth/2 + building.xWidth || patient.patientY < 600){
         if (patient.patientY == patient.currentDoctor.yPos){
           //if patient same height as doctor
           if (abs(patient.patientX - patient.currentDoctor.xPos)==15){
@@ -175,7 +175,17 @@ void draw(){
           //if not at same height keep going up
           patient.patientY--;
         }
-        
+       }
+       else{
+        if(patient.patientY > 600){    
+        if (patient.patientX > 300 ){
+          patient.patientX--;
+        }
+        else if (patient.patientX < 300){
+          patient.patientX++;
+        }
+       }
+      }
       }
       else{ //those who do not have a doctor //edit here more for seating
         if (patient.chairIndex<12){
