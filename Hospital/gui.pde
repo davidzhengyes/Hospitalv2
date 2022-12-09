@@ -52,6 +52,10 @@ public void patient_Speed_Slider(GCustomSlider source, GEvent event) { //_CODE_:
   
 } //_CODE_:patient_Speed:382723:
 
+public void Num_of_Chairs_Textbox(GTextField source, GEvent event) { //_CODE_:Num_of_Chairs:475323:
+ 
+} //_CODE_:Num_of_Chairs:475323:
+
 
 
 // Create all the GUI controls. 
@@ -97,7 +101,7 @@ public void createGUI(){
   label2.setOpaque(false);
   label3 = new GLabel(window1, 300, 0, 120, 20);
   label3.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label3.setText("Num Doctor");
+  label3.setText("Num of Doctors");
   label3.setOpaque(false);
   num_Doctor = new GTextField(window1, 300, 20, 120, 60, G4P.SCROLLBARS_NONE);
   num_Doctor.setPromptText("Enter a Number");
@@ -140,6 +144,15 @@ public void createGUI(){
   label5.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label5.setText("Patient Speed");
   label5.setOpaque(false);
+  Num_of_Chairs = new GTextField(window1, 20, 180, 120, 60, G4P.SCROLLBARS_NONE);
+  Num_of_Chairs.setPromptText("Enter a Number");
+  Num_of_Chairs.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
+  Num_of_Chairs.setOpaque(true);
+  Num_of_Chairs.addEventHandler(this, "Num_of_Chairs_Textbox");
+  label6 = new GLabel(window1, 20, 160, 120, 20);
+  label6.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  label6.setText("Num of Chairs");
+  label6.setOpaque(false);
   window1.loop();
 }
 
@@ -157,3 +170,5 @@ GLabel label4;
 GCheckbox prioritize_Injuries; 
 GCustomSlider patient_Speed; 
 GLabel label5; 
+GTextField Num_of_Chairs; 
+GLabel label6; 
