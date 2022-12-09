@@ -73,16 +73,15 @@ void draw(){
           allPatients.get(g).currentDoctor = doctor;
           doctor.currentPatient = allPatients.get(g);
           
-          try{
-            if (allPatients.get(g).searchingLeft==true){
+          
+            if (allPatients.get(g).searchingLeft==true && allPatients.get(g).chairIndex!=-1){
               leftGrid[allPatients.get(g).chairIndex]=false;
             }
-            else{
+            else if (allPatients.get(g).searchingLeft==false && allPatients.get(g).chairIndex!=-1){
               rightGrid[allPatients.get(g).chairIndex]=false;
             }
-          }
-          catch(Exception e){
-          }
+         
+        
           break;
 
         }
