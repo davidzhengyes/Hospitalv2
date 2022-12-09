@@ -69,7 +69,7 @@ void draw(){
       for(int g=0; g<allPatients.size();g++){
         
       //pick random patient
-        if (allPatients.get(g).currentDoctor == null){
+        if (allPatients.get(g).currentDoctor == null && allPatients.get(g).isHealthy==false){
           allPatients.get(g).currentDoctor = doctor;
           doctor.currentPatient = allPatients.get(g);
           
