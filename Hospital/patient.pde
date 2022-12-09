@@ -9,7 +9,6 @@ class Patient {
   boolean isHealthy;
   boolean isSeated;
   boolean reachedDoctor;
-  boolean entering;
   
   int chairIndex;
   boolean searchingLeft;
@@ -42,7 +41,6 @@ class Patient {
     this.samexWithSeat=false;
     this.reachedChairY=false;
     this.reachedSeat=false;
-    this.entering = true;
     
     this.updateColor();
     
