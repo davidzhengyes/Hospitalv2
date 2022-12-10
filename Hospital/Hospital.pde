@@ -9,6 +9,7 @@ ChairGrid cgRight = new ChairGrid(370, 666, 12);
 Boolean[] leftGrid = new Boolean[cgLeft.chairNum*2];
 Boolean[] rightGrid = new Boolean [cgRight.chairNum*2];
 int influx=20;
+Boolean prioritizeInjury=false;
 
 
 Building building = new Building (4, 100, 600, 800, 20);
@@ -59,26 +60,46 @@ void draw() {
 
     doctor.drawDr();
     if (doctor.currentPatient == null) { //if room is empty
-
+      
+      if (!prioritizeInjury){
       //looping through all patients and seeing if they dont have a doctor, and assigning them to each other
-      for (int g=0; g<allPatients.size(); g++) {
-
-        //pick random patient
-        if (allPatients.get(g).currentDoctor == null && allPatients.get(g).isHealthy==false) {
-          allPatients.get(g).currentDoctor = doctor;
-          doctor.currentPatient = allPatients.get(g);
-
-
-          if (allPatients.get(g).searchingLeft==true && allPatients.get(g).chairIndex!=-1) {
-            leftGrid[allPatients.get(g).chairIndex]=false;
-          } 
-          else if (allPatients.get(g).searchingLeft==false && allPatients.get(g).chairIndex!=-1) {
-            rightGrid[allPatients.get(g).chairIndex]=false;
+        for (int g=0; g<allPatients.size(); g++) {
+  
+          //pick patient depending on how far up they are in the list of allPatients
+          if (allPatients.get(g).currentDoctor == null && allPatients.get(g).isHealthy==false ) {
+            allPatients.get(g).currentDoctor = doctor;
+            doctor.currentPatient = allPatients.get(g);
+  
+  
+            if (allPatients.get(g).searchingLeft==true && allPatients.get(g).chairIndex!=-1) {
+              leftGrid[allPatients.get(g).chairIndex]=false;
+            } 
+            else if (allPatients.get(g).searchingLeft==false && allPatients.get(g).chairIndex!=-1) {
+              rightGrid[allPatients.get(g).chairIndex]=false;
+            }
+  
+  
+            break;
           }
-
-
-          break;
         }
+      }
+      else{
+        //meaning if there is no available patient to choose from, that does not have a doctor
+        Patient mostInjuryPatient = checkMostInjured();
+        if(mostInjuryPatient.injurySeverity!=-1){
+          mostInjuryPatient.currentDoctor=doctor;
+          doctor.currentPatient=mostInjuryPatient;
+          
+          if (mostInjuryPatient.searchingLeft==true && mostInjuryPatient.chairIndex!=-1) {
+            leftGrid[mostInjuryPatient.chairIndex]=false;
+          } 
+          else if (mostInjuryPatient.searchingLeft==false && mostInjuryPatient.chairIndex!=-1) {
+            rightGrid[mostInjuryPatient.chairIndex]=false;
+          }
+  
+        }
+        
+        
       }
     } 
     
@@ -274,6 +295,24 @@ Boolean checkForOpenSeats(Boolean [] grid) {
   return false;
 }
 
+Patient checkMostInjured(){
+  //starting with reference patient, then comparing
+  Patient maxInjured=new Patient (0, 0, -1, false, false, false, 300, 700);
+  //making reference patient, making sure that they don't have a doctor already
+  for (int i=0; i<allPatients.size();i++){
+    if (allPatients.get(i).currentDoctor==null){
+      maxInjured=allPatients.get(i);
+      break;
+    }
+  }
+
+  for(int i=0;i<allPatients.size();i++){
+    if (allPatients.get(i).injurySeverity>maxInjured.injurySeverity && allPatients.get(i).currentDoctor==null){
+      maxInjured=allPatients.get(i);
+    }
+  }
+  return maxInjured;
+}
 
 void checktoDelete() {
   for (int i=0; i<allPatients.size(); i++) {

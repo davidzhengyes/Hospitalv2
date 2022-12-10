@@ -45,7 +45,12 @@ public void patient_Influx_Slider(GCustomSlider source, GEvent event) { //_CODE_
 } //_CODE_:patient_Influx:524675:
 
 public void prioritize_Injuries_Checkbox(GCheckbox source, GEvent event) { //_CODE_:prioritize_Injuries:520254:
-
+  if (prioritize_Injuries.isSelected()==true){
+  prioritizeInjury=true;
+  }
+  else{
+    prioritizeInjury=false;
+  }
 } //_CODE_:prioritize_Injuries:520254:
 
 public void patient_Speed_Slider(GCustomSlider source, GEvent event) { //_CODE_:Sim_Speed:382723:
