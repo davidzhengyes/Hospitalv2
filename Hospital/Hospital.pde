@@ -174,16 +174,31 @@ void draw(){
         }
        }
        else{
-         if(patient.patientY > 500){
-          if(patient.patientY > 565){
-             patient.patientY--;
+         if (patient.chairIndex<12){
+           if(patient.patientY > 500){
+              if(patient.patientY > 565){
+                 patient.patientY--;
+               }
+              else if (patient.patientX > 300 ){
+                patient.patientX--;
+              }
+              else if (patient.patientX < 300){
+                patient.patientX++;
+              }
            }
-          else if (patient.patientX > 300 ){
-            patient.patientX--;
-          }
-          else if (patient.patientX < 300){
-            patient.patientX++;
-          }
+         }
+         else if (patient.chairIndex>11){
+           if(patient.patientY > 500){
+              if(patient.patientY < 700){
+                 patient.patientY++;
+               }
+              else if (patient.patientX > 300 ){
+                patient.patientX--;
+              }
+              else if (patient.patientX < 300){
+                patient.patientX++;
+              }
+           }
          }
       }
       }
