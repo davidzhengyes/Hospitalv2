@@ -48,9 +48,9 @@ public void prioritize_Injuries_Checkbox(GCheckbox source, GEvent event) { //_CO
 
 } //_CODE_:prioritize_Injuries:520254:
 
-public void patient_Speed_Slider(GCustomSlider source, GEvent event) { //_CODE_:patient_Speed:382723:
-  
-} //_CODE_:patient_Speed:382723:
+public void patient_Speed_Slider(GCustomSlider source, GEvent event) { //_CODE_:Sim_Speed:382723:
+  frameRate(patient_Speed.getValueF());
+} //_CODE_:Sim_Speed:382723:
 
 public void Num_of_Chairs_Textbox(GTextField source, GEvent event) { //_CODE_:Num_of_Chairs:475323:
  
@@ -129,20 +129,20 @@ public void createGUI(){
   prioritize_Injuries.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   prioritize_Injuries.setOpaque(true);
   prioritize_Injuries.addEventHandler(this, "prioritize_Injuries_Checkbox");
-  patient_Speed = new GCustomSlider(window1, 160, 100, 120, 60, "purple18px");
-  patient_Speed.setShowValue(true);
-  patient_Speed.setShowLimits(true);
-  patient_Speed.setLimits(5, 1, 10);
-  patient_Speed.setNbrTicks(10);
-  patient_Speed.setStickToTicks(true);
-  patient_Speed.setShowTicks(true);
-  patient_Speed.setNumberFormat(G4P.INTEGER, 0);
-  patient_Speed.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
-  patient_Speed.setOpaque(true);
-  patient_Speed.addEventHandler(this, "patient_Speed_Slider");
+  Sim_Speed = new GCustomSlider(window1, 160, 100, 120, 60, "purple18px");
+  Sim_Speed.setShowValue(true);
+  Sim_Speed.setShowLimits(true);
+  Sim_Speed.setLimits(10, 10, 100);
+  Sim_Speed.setNbrTicks(10);
+  Sim_Speed.setStickToTicks(true);
+  Sim_Speed.setShowTicks(true);
+  Sim_Speed.setNumberFormat(G4P.INTEGER, 0);
+  Sim_Speed.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
+  Sim_Speed.setOpaque(true);
+  Sim_Speed.addEventHandler(this, "patient_Speed_Slider");
   label5 = new GLabel(window1, 160, 80, 120, 20);
   label5.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label5.setText("Patient Speed");
+  label5.setText("Simulation Speed");
   label5.setOpaque(false);
   Num_of_Chairs = new GTextField(window1, 20, 180, 120, 60, G4P.SCROLLBARS_NONE);
   Num_of_Chairs.setPromptText("Enter a Number");
@@ -168,7 +168,7 @@ GTextField num_Doctor;
 GCustomSlider patient_Influx; 
 GLabel label4; 
 GCheckbox prioritize_Injuries; 
-GCustomSlider patient_Speed; 
+GCustomSlider Sim_Speed; 
 GLabel label5; 
 GTextField Num_of_Chairs; 
 GLabel label6; 
