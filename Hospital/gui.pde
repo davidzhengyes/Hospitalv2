@@ -41,7 +41,7 @@ public void num_Docotor_Changer(GTextField source, GEvent event) { //_CODE_:num_
 } //_CODE_:num_Doctor:501931:
 
 public void patient_Influx_Slider(GCustomSlider source, GEvent event) { //_CODE_:patient_Influx:524675:
- 
+  influx = patient_Influx.getValueI();
 } //_CODE_:patient_Influx:524675:
 
 public void prioritize_Injuries_Checkbox(GCheckbox source, GEvent event) { //_CODE_:prioritize_Injuries:520254:
@@ -49,7 +49,7 @@ public void prioritize_Injuries_Checkbox(GCheckbox source, GEvent event) { //_CO
 } //_CODE_:prioritize_Injuries:520254:
 
 public void patient_Speed_Slider(GCustomSlider source, GEvent event) { //_CODE_:Sim_Speed:382723:
-  frameRate(patient_Speed.getValueF());
+  frameRate(Sim_Speed.getValueF());
 } //_CODE_:Sim_Speed:382723:
 
 public void Num_of_Chairs_Textbox(GTextField source, GEvent event) { //_CODE_:Num_of_Chairs:475323:
