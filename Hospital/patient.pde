@@ -54,17 +54,24 @@ class Patient {
   }
   
   void updateColor(){
-    if (injurySeverity<=50){
+    if (injurySeverity<=50 && injurySeverity < 100){
       this.patientColor = color(injurySeverity/50.0*255,255,0);
     }
     else{
       this.patientColor = color(255, (100-injurySeverity)/50.0*255,0);
     }
-    if(this.injurySeverity==0 && this.isHealthy==false){
+    if(this.injurySeverity <= 0 && this.isHealthy==false){
       this.isHealthy = true;
       this.currentDoctor.currentPatient=null;
       this.currentDoctor=null;
       
+    /*if(this.injurySeverity >= 100){
+      this.isHealthy = true;
+      this.currentDoctor.currentPatient=null;
+      this.currentDoctor=null;
+      allPatients.remove(this);
+      println("hi");
+     }*/
       //println("is healthy");
     }
   }

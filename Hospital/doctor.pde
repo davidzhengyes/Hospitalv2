@@ -21,7 +21,26 @@ class Doctor {
  
  //methods 
   void healPatient(){
-    currentPatient.injurySeverity -= 1;
+    this.doctorSkill = doctor_Skill.getValueF();
+    this.doctorSpeed = doctor_Speed.getValueF();
+    
+    float healSpeed = (this.doctorSpeed/10)*2;
+    
+    //println(this.doctorSkill, currentPatient.injurySeverity);
+    
+    //if(this.doctorSkill/10 >= currentPatient.injurySeverity/100){
+      currentPatient.injurySeverity -= healSpeed;
+    //}
+    /*else{
+      if(currentPatient.injurySeverity < 100){
+        currentPatient.injurySeverity += healSpeed;
+      }
+      else if(currentPatient.injurySeverity >= 100){
+        currentPatient.patientColor = color(0);
+        currentPatient.patientY--;
+        
+      }
+    }*/
   }
  
   void drawDr(){

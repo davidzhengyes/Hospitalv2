@@ -316,7 +316,7 @@ Patient checkMostInjured(){
 
 void checktoDelete() {
   for (int i=0; i<allPatients.size(); i++) {
-    if (allPatients.get(i).patientY<0) {
+    if (allPatients.get(i).patientY < 0) {
       allPatients.remove(i);
     }
   }
