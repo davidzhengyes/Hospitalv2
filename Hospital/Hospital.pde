@@ -79,7 +79,7 @@ void draw() {
   cgRight.display();
   building.drawBuilding();
   drawPercentageText();
-  drawAllDead();
+  //drawAllDead();
   
  
   //didn't use Doctor doctor:allDoctors as an iterator because of ConcurrentModificationException
@@ -183,7 +183,7 @@ void draw() {
       
         //movement for after they have a doctor
       if (patient.currentDoctor != null) {
-        if (patient.patientX == building.pathWidth/2 + building.xWidth || patient.patientY < 500) {
+        if (patient.patientX == building.pathWidth/2 + building.xWidth || patient.patientY < 550) {
           if (patient.patientY == patient.currentDoctor.yPos) {
             //if patient same height as doctor
             if (abs(patient.patientX - patient.currentDoctor.xPos)==15) {
@@ -204,7 +204,7 @@ void draw() {
         //movement out of seats toward doctor, depends if they are in upper or lower row
         else {
           if (patient.chairIndex<12) {
-            if (patient.patientY > 500) {
+            if (patient.patientY > 550) {
               if (patient.patientY > 565) {
                 patient.patientY--;
               } 
@@ -217,7 +217,7 @@ void draw() {
             }
           } 
           else if (patient.chairIndex>11) {
-            if (patient.patientY > 500) {
+            if (patient.patientY > 550) {
               if (patient.patientY < 700) {
                 patient.patientY++;
               } 
