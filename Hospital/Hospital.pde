@@ -332,6 +332,8 @@ void drawAllDead(){
 void drawPercentageText(){
   textSize(40);
   if (totalPatients!=0){
+    fill(255);
+    textAlign(LEFT);
     text(str(round((float(totalDead)/totalPatients)*100))+"\u0025 "+"chance of death",50,720);
     
   }
@@ -391,6 +393,8 @@ void checktoDelete() {
 void drawAverageTime(){
   textSize(40);
   if (treatedPatients!=0){
+    fill(255);
+    textAlign(LEFT);
     text("Average Treatment Time: "+str(totalTreatmentTime/treatedPatients),50,750);
   }
   

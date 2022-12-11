@@ -11,7 +11,7 @@ class Doctor {
  
  //constructor
   Doctor(int x, int y){
-    this.doctorSkill = 1;
+    this.doctorSkill = 5;
     this.doctorSpeed = 1;
     this.doctorColor = color(0, 0, 255);
     this.xPos = x;
@@ -40,7 +40,7 @@ class Doctor {
   void drawDr(){
     fill(doctorColor);
     circle(this.xPos, this.yPos, 15);
-    noStroke();
+
   }
  
  

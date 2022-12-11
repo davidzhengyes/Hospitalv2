@@ -68,16 +68,32 @@ class Building{
       rect(currRoom.xPos, currRoom.yPos, this.xWidth, this.yWidth);
       
       
+      fill(0);
+      textAlign(CENTER,CENTER);
+      textSize(30);
+      
+      
+      
       stroke(0);
       strokeWeight(1);
       if (i%2==0){
         //these are to split the lines along the side of the room, making a gap
         line(currRoom.xPos+this.xWidth+2, currRoom.yPos,currRoom.xPos+this.xWidth+2,currRoom.yPos+(this.yWidth-this.doorWidth)/2.0);
         line(currRoom.xPos+this.xWidth+2, currRoom.yPos+(this.yWidth-this.doorWidth)/2.0 + this.doorWidth,currRoom.xPos+this.xWidth+2,currRoom.yPos+this.yWidth);
+        
+        fill(0);
+        textAlign(CENTER,CENTER);
+        textSize(30);
+        text(str(int(allDoctors.get(i).doctorSkill)),allDoctors.get(i).xPos-20,allDoctors.get(i).yPos-5);
       }
       else{
         line(currRoom.xPos-2,currRoom.yPos,currRoom.xPos-2,currRoom.yPos+(this.yWidth-this.doorWidth)/2.0);
         line(currRoom.xPos-2,currRoom.yPos+(this.yWidth-this.doorWidth)/2.0+this.doorWidth,currRoom.xPos-2,currRoom.yPos+this.yWidth);
+        
+        fill(0);
+        textAlign(CENTER,CENTER);
+        textSize(30);
+        text(str(int(allDoctors.get(i).doctorSkill)),allDoctors.get(i).xPos+20,allDoctors.get(i).yPos-5);
       }
       
       strokeWeight(5);
