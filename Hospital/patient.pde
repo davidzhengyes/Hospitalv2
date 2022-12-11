@@ -79,7 +79,7 @@ class Patient {
   void updateSeverity(){
     if (this.currentDoctor==null){
       
-      this.injurySeverity += (pow(1.0005+0.0001*(injuryCoeff-50),this.injurySeverity/2)-1); //more severe injuries will progress faster
+      this.injurySeverity += (pow(1.0005+0.0001*(injuryCoeff-5),this.injurySeverity/2)-1); //more severe injuries will progress faster
     }
   }
   

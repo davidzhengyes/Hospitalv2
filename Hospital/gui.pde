@@ -65,6 +65,14 @@ public void injury_coefficient_slider(GCustomSlider source, GEvent event) { //_C
   injuryCoeff=injury_coefficient.getValueI();
 } //_CODE_:injury_coefficient:903659:
 
+public void injury_Avg_Slider(GCustomSlider source, GEvent event) { //_CODE_:injuryAvg:776234:
+  avgInjury=injuryAvg.getValueI();
+} //_CODE_:injuryAvg:776234:
+
+public void injury_range_slider(GCustomSlider source, GEvent event) { //_CODE_:injury_range:892103:
+  injuryRange=injury_range.getValueI();
+} //_CODE_:injury_range:892103:
+
 
 
 // Create all the GUI controls. 
@@ -183,6 +191,36 @@ public void createGUI(){
   label6.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label6.setText("Injury Coefficient");
   label6.setOpaque(false);
+  injuryAvg = new GCustomSlider(window1, 300, 180, 120, 60, "purple18px");
+  injuryAvg.setShowValue(true);
+  injuryAvg.setShowLimits(true);
+  injuryAvg.setLimits(5, 1, 10);
+  injuryAvg.setNbrTicks(10);
+  injuryAvg.setStickToTicks(true);
+  injuryAvg.setShowTicks(true);
+  injuryAvg.setNumberFormat(G4P.INTEGER, 0);
+  injuryAvg.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
+  injuryAvg.setOpaque(true);
+  injuryAvg.addEventHandler(this, "injury_Avg_Slider");
+  label8 = new GLabel(window1, 300, 160, 120, 20);
+  label8.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  label8.setText("Average Injury");
+  label8.setOpaque(false);
+  injury_range = new GCustomSlider(window1, 300, 260, 120, 60, "purple18px");
+  injury_range.setShowValue(true);
+  injury_range.setShowLimits(true);
+  injury_range.setLimits(10, 0, 10);
+  injury_range.setNbrTicks(11);
+  injury_range.setStickToTicks(true);
+  injury_range.setShowTicks(true);
+  injury_range.setNumberFormat(G4P.INTEGER, 0);
+  injury_range.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
+  injury_range.setOpaque(true);
+  injury_range.addEventHandler(this, "injury_range_slider");
+  label9 = new GLabel(window1, 300, 240, 120, 20);
+  label9.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  label9.setText("Injury Range");
+  label9.setOpaque(false);
   window1.loop();
 }
 
@@ -204,3 +242,7 @@ GCustomSlider doctor_range;
 GLabel label7; 
 GCustomSlider injury_coefficient; 
 GLabel label6; 
+GCustomSlider injuryAvg; 
+GLabel label8; 
+GCustomSlider injury_range; 
+GLabel label9; 

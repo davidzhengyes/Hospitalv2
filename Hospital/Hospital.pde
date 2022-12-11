@@ -11,7 +11,10 @@ Boolean[] rightGrid = new Boolean [cgRight.chairNum*2];
 int influx=20;
 Boolean prioritizeInjury=false;
 int injuryCoeff;
-
+int avgInjury=5;
+int injuryRange=10;
+int lowerBound;
+int upperBound;
 
 Building building = new Building (4, 100, 600, 800, 20);
 void setup() {
@@ -37,7 +40,23 @@ void draw() {
 
   Boolean leftSeatAvailable = checkForOpenSeats(leftGrid);
   Boolean rightSeatAvailable = checkForOpenSeats(rightGrid);
-  Patient newPatient = new Patient (0, 0, int(random(1, 99)), false, false, false, 300, 800);
+  
+  
+  if(avgInjury*10-injuryRange*5<1){
+    lowerBound=1;
+  }
+  else{
+    lowerBound=avgInjury*10-injuryRange*5;
+  }
+  if (avgInjury*10+injuryRange*5>=99){
+    upperBound=99;
+  }
+  else{
+    upperBound=avgInjury*10+injuryRange*5; 
+  }
+ 
+  
+  Patient newPatient = new Patient (0, 0, int(random(lowerBound, upperBound)), false, false, false, 300, 800);
   if (frameCount%influx==0 && (rightSeatAvailable && leftSeatAvailable)) {
     allPatients.add(newPatient);
   } else if (frameCount%influx==0 && (leftSeatAvailable)) {
