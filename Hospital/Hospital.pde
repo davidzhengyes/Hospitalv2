@@ -1,6 +1,7 @@
 //Global Variables
 ArrayList<Doctor> allDoctors = new ArrayList<Doctor>();
 ArrayList<Patient> allPatients = new ArrayList<Patient>();
+ArrayList<DeadPatient> deadP = new ArrayList<DeadPatient>();
 import g4p_controls.*;
 PImage img;
 //s
@@ -72,6 +73,7 @@ void draw() {
   cgLeft.display();
   cgRight.display();
   building.drawBuilding();
+  drawAllDead();
   //println(allDoctors.get(0).currentPatient);
   //didn't use Doctor doctor:allDoctors as an iterator because of ConcurrentModificationException
   for (int i=0; i<allDoctors.size(); i++) {
@@ -314,6 +316,14 @@ Boolean checkForOpenSeats(Boolean [] grid) {
     }
   }
   return false;
+}
+
+void drawAllDead(){
+  for(DeadPatient dp:deadP){
+    fill(0);
+    circle(dp.xPos,dp.yPos,5);
+  }
+  
 }
 
 Patient checkMostInjured(){

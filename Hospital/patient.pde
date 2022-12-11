@@ -57,9 +57,18 @@ class Patient {
     if (injurySeverity<=50 && injurySeverity < 100){
       this.patientColor = color(injurySeverity/50.0*255,255,0);
     }
+    else if (injurySeverity>=100){
+      deadP.add(new DeadPatient(int(this.patientX),int(this.patientY)));
+      if(this.currentDoctor!=null){
+        this.currentDoctor.currentPatient=null;
+        this.currentDoctor=null;
+      }
+      allPatients.remove(this);
+    }
     else{
       this.patientColor = color(255, (100-injurySeverity)/50.0*255,0);
     }
+    
     if(this.injurySeverity <= 0 && this.isHealthy==false){
       this.isHealthy = true;
       this.currentDoctor.currentPatient=null;
