@@ -287,6 +287,7 @@ void draw() {
     } 
     //after they are healthy get them out of the top of the building
     else if (patient.isHealthy == true) {
+      patient.drawPa();
       
       if (patient.patientX != building.pathWidth/2 + building.xWidth) {
         if (patient.patientX >300 ) {
@@ -326,7 +327,7 @@ void drawAllDead(){
 void drawPercentageText(){
   textSize(40);
   if (totalPatients!=0){
-    text(str(round((float(totalDead)/totalPatients)*100))+"\u0025 "+"chance of death",100,700);
+    text(str(round((float(totalDead)/totalPatients)*100))+"\u0025 "+"chance of death",100,750);
     
   }
 }
