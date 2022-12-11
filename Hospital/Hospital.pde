@@ -20,6 +20,8 @@ int docSkill=5;
 int docSkillRange=5;
 int totalPatients=0;
 int totalDead=0;
+int treatedPatients=0;
+int totalTreatmentTime;
 
 Building building = new Building (4, 100, 600, 800, 20);
 void setup() {
@@ -79,6 +81,9 @@ void draw() {
   cgRight.display();
   building.drawBuilding();
   drawPercentageText();
+
+  drawAverageTime();
+
   drawAllDead();
   
  
@@ -327,7 +332,7 @@ void drawAllDead(){
 void drawPercentageText(){
   textSize(40);
   if (totalPatients!=0){
-    text(str(round((float(totalDead)/totalPatients)*100))+"\u0025 "+"chance of death",100,750);
+    text(str(round((float(totalDead)/totalPatients)*100))+"\u0025 "+"chance of death",50,720);
     
   }
 }
@@ -383,11 +388,20 @@ void checktoDelete() {
   }
 }
 
+void drawAverageTime(){
+  textSize(40);
+  if (treatedPatients!=0){
+    text("Average Treatment Time: "+str(totalTreatmentTime/treatedPatients),50,750);
+  }
+  
+}
+
 void reset() {
   noLoop();
   //clears everything and creates new building and grid
   allDoctors = new ArrayList<Doctor>();
   allPatients = new ArrayList<Patient>();
+  deadP = new ArrayList<DeadPatient>();
   building.createBuilding();
 
 
@@ -395,6 +409,7 @@ void reset() {
     leftGrid[i]=false;
     rightGrid[i]=false;
   }
+ 
 
   loop();
 }

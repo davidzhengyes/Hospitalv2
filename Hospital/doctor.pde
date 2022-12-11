@@ -30,8 +30,8 @@ class Doctor {
     
       currentPatient.injurySeverity -= healSpeed;
       
-     if ((10-doctorSkill)/100 > random(0,1)){ //so a doctor with 0 skill will have 1/10 chance of injuring patient
-       this.currentPatient.injurySeverity+=15;
+     if ((10-doctorSkill)/100 > random(0,1) && frameCount%5==0){ //so a doctor with 0 skill will have 1/10 chance of injuring patient
+       this.currentPatient.injurySeverity+=20;
      }
    
  

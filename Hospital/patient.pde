@@ -19,7 +19,8 @@ class Patient {
   float patientX;
   float patientY;
   
- 
+  int enterTime;
+  int treatmentTime;
   
   Doctor currentDoctor;
   
@@ -40,6 +41,7 @@ class Patient {
     this.samexWithSeat=false;
     this.reachedChairY=false;
     this.reachedSeat=false;
+    this.enterTime=frameCount;
     
     this.updateColor();
     
@@ -64,12 +66,16 @@ class Patient {
       }
       allPatients.remove(this);
       totalDead++;
+      treatedPatients++;
+      totalTreatmentTime+=(frameCount-this.enterTime);
     }
     else{
       this.patientColor = color(255, (100-injurySeverity)/50.0*255,0);
     }
     
     if(this.injurySeverity <= 0 && this.isHealthy==false){
+      treatedPatients++;
+      totalTreatmentTime+=(frameCount-this.enterTime);
       this.isHealthy = true;
       this.currentDoctor.currentPatient=null;
       this.currentDoctor=null;
