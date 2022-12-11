@@ -33,7 +33,7 @@ void setup() {
 
 
 void draw() {
-
+  println(frameCount);
   Boolean leftSeatAvailable = checkForOpenSeats(leftGrid);
   Boolean rightSeatAvailable = checkForOpenSeats(rightGrid);
   Patient newPatient = new Patient (0, 0, int(random(1, 99)), false, false, false, 300, 800);
@@ -157,6 +157,7 @@ void draw() {
     //}
 
     patient.updateColor();
+    patient.updateSeverity();
 
 
     if (patient.isHealthy == false) {//need if here, if patient is not already healed

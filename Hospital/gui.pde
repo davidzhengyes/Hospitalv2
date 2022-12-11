@@ -57,9 +57,9 @@ public void patient_Speed_Slider(GCustomSlider source, GEvent event) { //_CODE_:
   frameRate(Sim_Speed.getValueF());
 } //_CODE_:Sim_Speed:382723:
 
-public void Num_of_Chairs_Textbox(GTextField source, GEvent event) { //_CODE_:Num_of_Chairs:475323:
- 
-} //_CODE_:Num_of_Chairs:475323:
+public void doctor_skill_range_slider(GCustomSlider source, GEvent event) { //_CODE_:doctor_range:380595:
+  println("doctor_range - GCustomSlider >> GEvent." + event + " @ " + millis());
+} //_CODE_:doctor_range:380595:
 
 
 
@@ -113,7 +113,7 @@ public void createGUI(){
   num_Doctor.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   num_Doctor.setOpaque(true);
   num_Doctor.addEventHandler(this, "num_Docotor_Changer");
-  patient_Influx = new GCustomSlider(window1, 20, 100, 120, 60, "purple18px");
+  patient_Influx = new GCustomSlider(window1, 160, 186, 120, 60, "purple18px");
   patient_Influx.setShowValue(true);
   patient_Influx.setShowLimits(true);
   patient_Influx.setLimits(10, 1, 40);
@@ -124,7 +124,7 @@ public void createGUI(){
   patient_Influx.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   patient_Influx.setOpaque(true);
   patient_Influx.addEventHandler(this, "patient_Influx_Slider");
-  label4 = new GLabel(window1, 20, 80, 120, 20);
+  label4 = new GLabel(window1, 160, 165, 120, 20);
   label4.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label4.setText("Patient Influx");
   label4.setOpaque(false);
@@ -149,15 +149,21 @@ public void createGUI(){
   label5.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label5.setText("Simulation Speed");
   label5.setOpaque(false);
-  Num_of_Chairs = new GTextField(window1, 20, 180, 120, 60, G4P.SCROLLBARS_NONE);
-  Num_of_Chairs.setPromptText("Enter a Number");
-  Num_of_Chairs.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
-  Num_of_Chairs.setOpaque(true);
-  Num_of_Chairs.addEventHandler(this, "Num_of_Chairs_Textbox");
-  label6 = new GLabel(window1, 20, 160, 120, 20);
-  label6.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label6.setText("Num of Chairs");
-  label6.setOpaque(false);
+  doctor_range = new GCustomSlider(window1, 17, 100, 126, 58, "purple18px");
+  doctor_range.setShowValue(true);
+  doctor_range.setShowLimits(true);
+  doctor_range.setLimits(1, 1, 5);
+  doctor_range.setNbrTicks(5);
+  doctor_range.setStickToTicks(true);
+  doctor_range.setShowTicks(true);
+  doctor_range.setNumberFormat(G4P.INTEGER, 0);
+  doctor_range.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
+  doctor_range.setOpaque(true);
+  doctor_range.addEventHandler(this, "doctor_skill_range_slider");
+  label7 = new GLabel(window1, 20, 81, 120, 20);
+  label7.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  label7.setText("Doctor Skill Range");
+  label7.setOpaque(false);
   window1.loop();
 }
 
@@ -175,5 +181,5 @@ GLabel label4;
 GCheckbox prioritize_Injuries; 
 GCustomSlider Sim_Speed; 
 GLabel label5; 
-GTextField Num_of_Chairs; 
-GLabel label6; 
+GCustomSlider doctor_range; 
+GLabel label7; 

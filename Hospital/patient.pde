@@ -76,13 +76,15 @@ class Patient {
     }
   }
   
+  void updateSeverity(){
+    this.injurySeverity += (pow(1.001,this.injurySeverity)-1); //more severe injuries will progress faster
+  }
+  
   void drawPa(){
     fill(patientColor);
     circle(patientX,patientY,15);
   }
   
-  void moveUP(){
-    
-  }
+ 
 
 }
