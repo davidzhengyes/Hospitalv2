@@ -10,6 +10,7 @@ Boolean[] leftGrid = new Boolean[cgLeft.chairNum*2];
 Boolean[] rightGrid = new Boolean [cgRight.chairNum*2];
 int influx=20;
 Boolean prioritizeInjury=false;
+int injuryCoeff;
 
 
 Building building = new Building (4, 100, 600, 800, 20);
@@ -33,7 +34,7 @@ void setup() {
 
 
 void draw() {
-  println(frameCount);
+
   Boolean leftSeatAvailable = checkForOpenSeats(leftGrid);
   Boolean rightSeatAvailable = checkForOpenSeats(rightGrid);
   Patient newPatient = new Patient (0, 0, int(random(1, 99)), false, false, false, 300, 800);

@@ -61,6 +61,10 @@ public void doctor_skill_range_slider(GCustomSlider source, GEvent event) { //_C
   println("doctor_range - GCustomSlider >> GEvent." + event + " @ " + millis());
 } //_CODE_:doctor_range:380595:
 
+public void injury_coefficient_slider(GCustomSlider source, GEvent event) { //_CODE_:injury_coefficient:903659:
+  injuryCoeff=injury_coefficient.getValueI();
+} //_CODE_:injury_coefficient:903659:
+
 
 
 // Create all the GUI controls. 
@@ -113,7 +117,7 @@ public void createGUI(){
   num_Doctor.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   num_Doctor.setOpaque(true);
   num_Doctor.addEventHandler(this, "num_Docotor_Changer");
-  patient_Influx = new GCustomSlider(window1, 160, 186, 120, 60, "purple18px");
+  patient_Influx = new GCustomSlider(window1, 160, 180, 120, 60, "purple18px");
   patient_Influx.setShowValue(true);
   patient_Influx.setShowLimits(true);
   patient_Influx.setLimits(10, 1, 40);
@@ -124,7 +128,7 @@ public void createGUI(){
   patient_Influx.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   patient_Influx.setOpaque(true);
   patient_Influx.addEventHandler(this, "patient_Influx_Slider");
-  label4 = new GLabel(window1, 160, 165, 120, 20);
+  label4 = new GLabel(window1, 160, 160, 120, 20);
   label4.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label4.setText("Patient Influx");
   label4.setOpaque(false);
@@ -149,7 +153,7 @@ public void createGUI(){
   label5.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label5.setText("Simulation Speed");
   label5.setOpaque(false);
-  doctor_range = new GCustomSlider(window1, 17, 100, 126, 58, "purple18px");
+  doctor_range = new GCustomSlider(window1, 17, 100, 120, 60, "purple18px");
   doctor_range.setShowValue(true);
   doctor_range.setShowLimits(true);
   doctor_range.setLimits(1, 1, 5);
@@ -160,10 +164,25 @@ public void createGUI(){
   doctor_range.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   doctor_range.setOpaque(true);
   doctor_range.addEventHandler(this, "doctor_skill_range_slider");
-  label7 = new GLabel(window1, 20, 81, 120, 20);
+  label7 = new GLabel(window1, 20, 80, 120, 20);
   label7.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label7.setText("Doctor Skill Range");
   label7.setOpaque(false);
+  injury_coefficient = new GCustomSlider(window1, 20, 180, 120, 60, "purple18px");
+  injury_coefficient.setShowValue(true);
+  injury_coefficient.setShowLimits(true);
+  injury_coefficient.setLimits(5, 0, 10);
+  injury_coefficient.setNbrTicks(11);
+  injury_coefficient.setStickToTicks(true);
+  injury_coefficient.setShowTicks(true);
+  injury_coefficient.setNumberFormat(G4P.INTEGER, 0);
+  injury_coefficient.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
+  injury_coefficient.setOpaque(true);
+  injury_coefficient.addEventHandler(this, "injury_coefficient_slider");
+  label6 = new GLabel(window1, 20, 160, 120, 20);
+  label6.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  label6.setText("Injury Coefficient");
+  label6.setOpaque(false);
   window1.loop();
 }
 
@@ -183,3 +202,5 @@ GCustomSlider Sim_Speed;
 GLabel label5; 
 GCustomSlider doctor_range; 
 GLabel label7; 
+GCustomSlider injury_coefficient; 
+GLabel label6; 
