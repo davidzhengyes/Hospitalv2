@@ -79,7 +79,7 @@ void draw() {
   cgRight.display();
   building.drawBuilding();
   drawPercentageText();
-  //drawAllDead();
+  drawAllDead();
   
  
   //didn't use Doctor doctor:allDoctors as an iterator because of ConcurrentModificationException
