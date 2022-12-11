@@ -27,26 +27,14 @@ class Doctor {
     
     float healSpeed = (this.doctorSpeed/10)*2;
     
-    //println(this.doctorSkill, currentPatient.injurySeverity);
     
-    //if(this.doctorSkill/10 >= currentPatient.injurySeverity/100){
       currentPatient.injurySeverity -= healSpeed;
       
      if ((10-doctorSkill)/100 > random(0,1)){ //so a doctor with 0 skill will have 1/10 chance of injuring patient
        this.currentPatient.injurySeverity+=15;
      }
    
- //}
-    /*else{
-      if(currentPatient.injurySeverity < 100){
-        currentPatient.injurySeverity += healSpeed;
-      }
-      else if(currentPatient.injurySeverity >= 100){
-        currentPatient.patientColor = color(0);
-        currentPatient.patientY--;
-        
-      }
-    }*/
+ 
   }
  
   void drawDr(){

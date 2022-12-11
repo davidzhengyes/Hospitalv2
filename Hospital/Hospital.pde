@@ -42,11 +42,11 @@ void setup() {
 
 
 void draw() {
-
+  //checks if there are seats available
   Boolean leftSeatAvailable = checkForOpenSeats(leftGrid);
   Boolean rightSeatAvailable = checkForOpenSeats(rightGrid);
   
-  
+  //manipulates upper and lower bounds of injury depending on slider values
   if(avgInjury*10-injuryRange*5<1){
     lowerBound=1;
   }
@@ -60,8 +60,8 @@ void draw() {
     upperBound=avgInjury*10+injuryRange*5; 
   }
  
-  
-  Patient newPatient = new Patient (0, 0, int(random(lowerBound, upperBound)), false, false, false, 300, 800);
+  //makes a new patient and decides whether to add or not depending on whether there are seats avaialble, and increases total patient count.
+  Patient newPatient = new Patient ( int(random(lowerBound, upperBound)), false, false, 300, 800);
   if (frameCount%influx==0 && (rightSeatAvailable && leftSeatAvailable)) {
     allPatients.add(newPatient);
     totalPatients++;
@@ -75,7 +75,7 @@ void draw() {
     totalPatients++;
   }
   
-
+  //draws everything
   background(210);
   cgLeft.display();
   cgRight.display();
@@ -83,8 +83,9 @@ void draw() {
   drawPercentageText();
   drawAllDead();
   
-  //println(allDoctors.get(0).currentPatient);
+ 
   //didn't use Doctor doctor:allDoctors as an iterator because of ConcurrentModificationException
+  //loops through doctors
   for (int i=0; i<allDoctors.size(); i++) {
     Doctor doctor = allDoctors.get(i);
 
@@ -101,7 +102,7 @@ void draw() {
             allPatients.get(g).currentDoctor = doctor;
             doctor.currentPatient = allPatients.get(g);
   
-  
+            //setting the chair they were just in to be empty
             if (allPatients.get(g).searchingLeft==true && allPatients.get(g).chairIndex!=-1) {
               leftGrid[allPatients.get(g).chairIndex]=false;
             } 
@@ -116,6 +117,7 @@ void draw() {
       }
       else{
         //meaning if there is no available patient to choose from, that does not have a doctor
+        //chooses most injured patient
         Patient mostInjuryPatient = checkMostInjured();
         if(mostInjuryPatient.injurySeverity!=-1){
           mostInjuryPatient.currentDoctor=doctor;
@@ -133,7 +135,7 @@ void draw() {
         
       }
     } 
-    
+    //if patient has doctor, heal the patient
     else {
       if (doctor.currentPatient.reachedDoctor) {
         doctor.healPatient();
@@ -143,12 +145,13 @@ void draw() {
 
   //not using Patient patient:allPatients same reason as doctors
   for (int i=0; i<allPatients.size(); i++) {
-
+  //loops through all patients
     checktoDelete();
 
     Boolean[] gridToSearch;
     Patient patient = allPatients.get(i);
 
+    //creates pointer to either left or right grid
     if (patient.searchingLeft==true && patient.chairIndex==-1) {
       gridToSearch=leftGrid;
     } 
@@ -156,7 +159,7 @@ void draw() {
       gridToSearch=rightGrid;
     }
 
-
+    //checks if they don't have a chair nor a doctor, then assigns them to a chair if it is empty
     if (patient.chairIndex==-1 && patient.currentDoctor==null) {
 
       for (int g=0; g<gridToSearch.length; g++) {
@@ -171,7 +174,7 @@ void draw() {
     }
 
  
-
+    //updates colour depending on severity, and updates severity based on injury coefficient slider
     patient.updateColor();
     patient.updateSeverity();
 
@@ -179,8 +182,8 @@ void draw() {
     if (patient.isHealthy == false) {//need if here, if patient is not already healed
       patient.drawPa();
 
-      patient.timeSinceEntered++;
-
+      
+        //movement for after they have a doctor
       if (patient.currentDoctor != null) {
         if (patient.patientX == building.pathWidth/2 + building.xWidth || patient.patientY < 500) {
           if (patient.patientY == patient.currentDoctor.yPos) {
@@ -200,6 +203,7 @@ void draw() {
             patient.patientY--;
           }
         } 
+        //movement out of seats toward doctor, depends if they are in upper or lower row
         else {
           if (patient.chairIndex<12) {
             if (patient.patientY > 500) {
@@ -229,7 +233,7 @@ void draw() {
           }
         }
       } 
-      else { //those who do not have a doctor //edit here more for seating
+      else { //those who do not have a doctor, making them get seated
         if (patient.chairIndex<12) {
           if (patient.patientY==600) {
             patient.reachedChairY=true;
@@ -283,6 +287,7 @@ void draw() {
         }
       }
     } 
+    //after they are healthy get them out of the top of the building
     else if (patient.isHealthy == true) {
       
       if (patient.patientX != building.pathWidth/2 + building.xWidth) {
@@ -300,7 +305,7 @@ void draw() {
   }
 }
 
-
+//loops through a seating grid and seeing if they are empty or not
 Boolean checkForOpenSeats(Boolean [] grid) {
   for (int i=0; i<leftGrid.length; i++) {
     if (grid[i]==false ) {
@@ -324,14 +329,14 @@ void drawPercentageText(){
   textSize(40);
   if (totalPatients!=0){
     text(str(round((float(totalDead)/totalPatients)*100))+"\u0025 "+"chance of death",100,700);
-    println(totalDead,totalPatients);
+    
   }
 }
 
 int docLower;
 int docUpper;
 void updateAllSkill(){
-  
+  //checks bounds on doctor skill and making it random between bounds
   if(docSkill-docSkillRange<0){
     docLower=1;
   }
@@ -349,12 +354,12 @@ void updateAllSkill(){
     allDoctors.get(i).doctorSkill=int(random(docLower,docUpper));
       
   }
-  println(docLower,docUpper);
+ 
 }
 
 Patient checkMostInjured(){
   //starting with reference patient, then comparing
-  Patient maxInjured=new Patient (0, 0, -1, false, false, false, 300, 700);
+  Patient maxInjured=new Patient ( -1, false, false, 300, 700);
   //making reference patient, making sure that they don't have a doctor already
   for (int i=0; i<allPatients.size();i++){
     if (allPatients.get(i).currentDoctor==null){
@@ -381,10 +386,11 @@ void checktoDelete() {
 
 void reset() {
   noLoop();
+  //clears everything and creates new building and grid
   allDoctors = new ArrayList<Doctor>();
   allPatients = new ArrayList<Patient>();
   building.createBuilding();
-  allPatients.add(new Patient (0, 0, 99, false, false, false, 300, 700));
+
 
   for (int i=0; i<leftGrid.length; i++) {
     leftGrid[i]=false;

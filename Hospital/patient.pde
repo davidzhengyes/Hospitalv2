@@ -1,6 +1,5 @@
 class Patient {
-  int timeSinceEntered; 
-  int treatmentTime;
+  
   
   float injurySeverity;
   color patientColor;
@@ -25,11 +24,11 @@ class Patient {
   Doctor currentDoctor;
   
    //constructor
-  Patient(int tSE, int tT, float iS, boolean iD, boolean iH, boolean ss, float pX, float pY) {
-    this.timeSinceEntered = tSE;  
-    this.treatmentTime = tT;
+  Patient( float iS, boolean iH, boolean ss, float pX, float pY) {
+    
+   
     this.injurySeverity = iS; //please limit between 0 & 100
-    this.isDead = iD;   
+    
     this.isHealthy = iH;
     this.isSeated = ss;
     this.patientX = pX;
@@ -75,14 +74,7 @@ class Patient {
       this.currentDoctor.currentPatient=null;
       this.currentDoctor=null;
       
-    /*if(this.injurySeverity >= 100){
-      this.isHealthy = true;
-      this.currentDoctor.currentPatient=null;
-      this.currentDoctor=null;
-      allPatients.remove(this);
-      println("hi");
-     }*/
-      //println("is healthy");
+  
     }
   }
   

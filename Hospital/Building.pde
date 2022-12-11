@@ -26,7 +26,7 @@ class Building{
     
     
   }
-  
+  //makes new building and room coordinates
   void createBuilding(){
     rooms = new ArrayList <Room>();
     allDoctors = new ArrayList<Doctor>();
@@ -52,7 +52,7 @@ class Building{
     }
   }
   
-  
+  //draws rooms and the walls around them
   void drawBuilding(){
     
     for (int i=0; i<this.numRooms; i++){
@@ -71,7 +71,7 @@ class Building{
       stroke(0);
       strokeWeight(1);
       if (i%2==0){
-        
+        //these are to split the lines along the side of the room, making a gap
         line(currRoom.xPos+this.xWidth+2, currRoom.yPos,currRoom.xPos+this.xWidth+2,currRoom.yPos+(this.yWidth-this.doorWidth)/2.0);
         line(currRoom.xPos+this.xWidth+2, currRoom.yPos+(this.yWidth-this.doorWidth)/2.0 + this.doorWidth,currRoom.xPos+this.xWidth+2,currRoom.yPos+this.yWidth);
       }
