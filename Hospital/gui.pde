@@ -14,9 +14,9 @@
  * =========================================================
  */
 
-synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:window1:233619:
+synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:HospitalControls:233619:
   appc.background(230);
-} //_CODE_:window1:233619:
+} //_CODE_:HospitalControls:233619:
 
 public void doctor_Skill_Slider(GCustomSlider source, GEvent event) { //_CODE_:doctor_Skill:394406:
   docSkill = doctor_Skill.getValueI();
@@ -84,11 +84,11 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setMouseOverEnabled(false);
   surface.setTitle("Sketch Window");
-  window1 = GWindow.getWindow(this, "Window title", 0, 0, 500, 500, JAVA2D);
-  window1.noLoop();
-  window1.setActionOnClose(G4P.KEEP_OPEN);
-  window1.addDrawHandler(this, "win_draw1");
-  doctor_Skill = new GCustomSlider(window1, 20, 20, 120, 60, "purple18px");
+  HospitalControls = GWindow.getWindow(this, "Hospital Controls", 0, 0, 500, 350, JAVA2D);
+  HospitalControls.noLoop();
+  HospitalControls.setActionOnClose(G4P.KEEP_OPEN);
+  HospitalControls.addDrawHandler(this, "win_draw1");
+  doctor_Skill = new GCustomSlider(HospitalControls, 20, 20, 120, 60, "purple18px");
   doctor_Skill.setShowValue(true);
   doctor_Skill.setShowLimits(true);
   doctor_Skill.setLimits(5, 1, 10);
@@ -99,11 +99,11 @@ public void createGUI(){
   doctor_Skill.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   doctor_Skill.setOpaque(true);
   doctor_Skill.addEventHandler(this, "doctor_Skill_Slider");
-  label1 = new GLabel(window1, 20, 0, 120, 20);
+  label1 = new GLabel(HospitalControls, 20, 0, 120, 20);
   label1.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label1.setText("Doctor Skill");
   label1.setOpaque(false);
-  doctor_Speed = new GCustomSlider(window1, 160, 20, 120, 60, "purple18px");
+  doctor_Speed = new GCustomSlider(HospitalControls, 160, 20, 120, 60, "purple18px");
   doctor_Speed.setShowValue(true);
   doctor_Speed.setShowLimits(true);
   doctor_Speed.setLimits(5, 1, 10);
@@ -114,20 +114,20 @@ public void createGUI(){
   doctor_Speed.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   doctor_Speed.setOpaque(true);
   doctor_Speed.addEventHandler(this, "doctor_Speed_Slider");
-  label2 = new GLabel(window1, 160, 0, 120, 20);
+  label2 = new GLabel(HospitalControls, 160, 0, 120, 20);
   label2.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label2.setText("Doctor Heal Speed");
   label2.setOpaque(false);
-  label3 = new GLabel(window1, 300, 0, 120, 20);
+  label3 = new GLabel(HospitalControls, 300, 0, 120, 20);
   label3.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label3.setText("Num of Doctors");
   label3.setOpaque(false);
-  num_Doctor = new GTextField(window1, 300, 20, 120, 60, G4P.SCROLLBARS_NONE);
+  num_Doctor = new GTextField(HospitalControls, 300, 20, 120, 60, G4P.SCROLLBARS_NONE);
   num_Doctor.setPromptText("Enter a Number");
   num_Doctor.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   num_Doctor.setOpaque(true);
   num_Doctor.addEventHandler(this, "num_Docotor_Changer");
-  patient_Influx = new GCustomSlider(window1, 160, 180, 120, 60, "purple18px");
+  patient_Influx = new GCustomSlider(HospitalControls, 160, 180, 120, 60, "purple18px");
   patient_Influx.setShowValue(true);
   patient_Influx.setShowLimits(true);
   patient_Influx.setLimits(10, 1, 40);
@@ -138,17 +138,17 @@ public void createGUI(){
   patient_Influx.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   patient_Influx.setOpaque(true);
   patient_Influx.addEventHandler(this, "patient_Influx_Slider");
-  label4 = new GLabel(window1, 160, 160, 120, 20);
+  label4 = new GLabel(HospitalControls, 160, 160, 120, 20);
   label4.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label4.setText("Patient Influx");
   label4.setOpaque(false);
-  prioritize_Injuries = new GCheckbox(window1, 300, 100, 120, 60);
+  prioritize_Injuries = new GCheckbox(HospitalControls, 300, 100, 120, 60);
   prioritize_Injuries.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
   prioritize_Injuries.setText("Prioritize Injuries?");
   prioritize_Injuries.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   prioritize_Injuries.setOpaque(true);
   prioritize_Injuries.addEventHandler(this, "prioritize_Injuries_Checkbox");
-  Sim_Speed = new GCustomSlider(window1, 160, 100, 120, 60, "purple18px");
+  Sim_Speed = new GCustomSlider(HospitalControls, 160, 100, 120, 60, "purple18px");
   Sim_Speed.setShowValue(true);
   Sim_Speed.setShowLimits(true);
   Sim_Speed.setLimits(60, 10, 100);
@@ -159,11 +159,11 @@ public void createGUI(){
   Sim_Speed.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   Sim_Speed.setOpaque(true);
   Sim_Speed.addEventHandler(this, "patient_Speed_Slider");
-  label5 = new GLabel(window1, 160, 80, 120, 20);
+  label5 = new GLabel(HospitalControls, 160, 80, 120, 20);
   label5.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label5.setText("Simulation Speed");
   label5.setOpaque(false);
-  doctor_range = new GCustomSlider(window1, 17, 100, 120, 60, "purple18px");
+  doctor_range = new GCustomSlider(HospitalControls, 17, 100, 120, 60, "purple18px");
   doctor_range.setShowValue(true);
   doctor_range.setShowLimits(true);
   doctor_range.setLimits(1, 1, 5);
@@ -174,11 +174,11 @@ public void createGUI(){
   doctor_range.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   doctor_range.setOpaque(true);
   doctor_range.addEventHandler(this, "doctor_skill_range_slider");
-  label7 = new GLabel(window1, 20, 80, 120, 20);
+  label7 = new GLabel(HospitalControls, 20, 80, 120, 20);
   label7.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label7.setText("Doctor Skill Range");
   label7.setOpaque(false);
-  injury_coefficient = new GCustomSlider(window1, 20, 180, 120, 60, "purple18px");
+  injury_coefficient = new GCustomSlider(HospitalControls, 20, 180, 120, 60, "purple18px");
   injury_coefficient.setShowValue(true);
   injury_coefficient.setShowLimits(true);
   injury_coefficient.setLimits(5, 0, 10);
@@ -189,11 +189,11 @@ public void createGUI(){
   injury_coefficient.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   injury_coefficient.setOpaque(true);
   injury_coefficient.addEventHandler(this, "injury_coefficient_slider");
-  label6 = new GLabel(window1, 20, 160, 120, 20);
+  label6 = new GLabel(HospitalControls, 20, 160, 120, 20);
   label6.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label6.setText("Injury Coefficient");
   label6.setOpaque(false);
-  injuryAvg = new GCustomSlider(window1, 300, 180, 120, 60, "purple18px");
+  injuryAvg = new GCustomSlider(HospitalControls, 300, 180, 120, 60, "purple18px");
   injuryAvg.setShowValue(true);
   injuryAvg.setShowLimits(true);
   injuryAvg.setLimits(5, 1, 10);
@@ -204,11 +204,11 @@ public void createGUI(){
   injuryAvg.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   injuryAvg.setOpaque(true);
   injuryAvg.addEventHandler(this, "injury_Avg_Slider");
-  label8 = new GLabel(window1, 300, 160, 120, 20);
+  label8 = new GLabel(HospitalControls, 300, 160, 120, 20);
   label8.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label8.setText("Average Injury");
   label8.setOpaque(false);
-  injury_range = new GCustomSlider(window1, 300, 260, 120, 60, "purple18px");
+  injury_range = new GCustomSlider(HospitalControls, 300, 260, 120, 60, "purple18px");
   injury_range.setShowValue(true);
   injury_range.setShowLimits(true);
   injury_range.setLimits(10, 0, 10);
@@ -219,16 +219,16 @@ public void createGUI(){
   injury_range.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   injury_range.setOpaque(true);
   injury_range.addEventHandler(this, "injury_range_slider");
-  label9 = new GLabel(window1, 300, 240, 120, 20);
+  label9 = new GLabel(HospitalControls, 300, 240, 120, 20);
   label9.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label9.setText("Injury Range");
   label9.setOpaque(false);
-  window1.loop();
+  HospitalControls.loop();
 }
 
 // Variable declarations 
 // autogenerated do not edit
-GWindow window1;
+GWindow HospitalControls;
 GCustomSlider doctor_Skill; 
 GLabel label1; 
 GCustomSlider doctor_Speed; 
