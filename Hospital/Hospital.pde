@@ -28,8 +28,6 @@ void setup() {
 
 
 
-  Patient ss = new Patient (0, 0, 99, false, false, false, 300, 700);
-  allPatients.add(ss);
 
   createGUI();
   building.createBuilding();
