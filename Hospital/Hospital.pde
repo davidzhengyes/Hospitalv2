@@ -16,6 +16,8 @@ int avgInjury=5;
 int injuryRange=10;
 int lowerBound;
 int upperBound;
+int docSkill=5;
+int docSkillRange=5;
 
 Building building = new Building (4, 100, 600, 800, 20);
 void setup() {
@@ -67,7 +69,7 @@ void draw() {
     newPatient.searchingLeft=false;
     allPatients.add(newPatient);
   }
-
+  
 
   background(210);
   cgLeft.display();
@@ -324,6 +326,29 @@ void drawAllDead(){
     circle(dp.xPos,dp.yPos,5);
   }
   
+}
+
+int docLower;
+int docUpper;
+void updateAllSkill(){
+  
+  if(docSkill-docSkillRange<0){
+    docLower=1;
+  }
+  else{
+    docLower=docSkill-docSkillRange;
+  }
+  if (docSkill+docSkillRange>9){
+    docUpper=10
+  }
+  else{
+    docUpper=docSkill+docSkillRange; 
+  }
+  
+  for (int i=0;i<allDoctors.size();i++){
+    allDoctors.get(i).skill=int(random(docLower,docUpper));
+      
+  }
 }
 
 Patient checkMostInjured(){

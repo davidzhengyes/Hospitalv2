@@ -6,6 +6,7 @@ class Doctor {
  int xPos;
  int yPos;
  
+ 
   Patient currentPatient;
  
  //constructor

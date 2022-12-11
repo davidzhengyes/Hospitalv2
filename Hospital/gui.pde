@@ -19,7 +19,8 @@ synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:windo
 } //_CODE_:window1:233619:
 
 public void doctor_Skill_Slider(GCustomSlider source, GEvent event) { //_CODE_:doctor_Skill:394406:
-  allDoctors.get(0).doctorSkill = doctor_Skill.getValueF();
+  docSkill = doctor_Skill.getValueI();
+  updateAllSkill();
 } //_CODE_:doctor_Skill:394406:
 
 public void doctor_Speed_Slider(GCustomSlider source, GEvent event) { //_CODE_:doctor_Speed:501818:
@@ -58,7 +59,8 @@ public void patient_Speed_Slider(GCustomSlider source, GEvent event) { //_CODE_:
 } //_CODE_:Sim_Speed:382723:
 
 public void doctor_skill_range_slider(GCustomSlider source, GEvent event) { //_CODE_:doctor_range:380595:
-  println("doctor_range - GCustomSlider >> GEvent." + event + " @ " + millis());
+  docSkillRange=doctor_range.getValueI();
+  updateAllSkill();
 } //_CODE_:doctor_range:380595:
 
 public void injury_coefficient_slider(GCustomSlider source, GEvent event) { //_CODE_:injury_coefficient:903659:
