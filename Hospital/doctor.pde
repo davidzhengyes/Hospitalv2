@@ -22,7 +22,7 @@ class Doctor {
  
  //methods 
   void healPatient(){
-    this.doctorSkill = doctor_Skill.getValueF();
+    
     this.doctorSpeed = doctor_Speed.getValueF();
     
     float healSpeed = (this.doctorSpeed/10)*2;
@@ -31,7 +31,12 @@ class Doctor {
     
     //if(this.doctorSkill/10 >= currentPatient.injurySeverity/100){
       currentPatient.injurySeverity -= healSpeed;
-    //}
+      
+     if ((10-doctorSkill)/100 > random(0,1)){ //so a doctor with 0 skill will have 1/10 chance of injuring patient
+       this.currentPatient.injurySeverity+=15;
+     }
+   
+ //}
     /*else{
       if(currentPatient.injurySeverity < 100){
         currentPatient.injurySeverity += healSpeed;

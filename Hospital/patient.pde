@@ -64,6 +64,7 @@ class Patient {
         this.currentDoctor=null;
       }
       allPatients.remove(this);
+      totalDead++;
     }
     else{
       this.patientColor = color(255, (100-injurySeverity)/50.0*255,0);

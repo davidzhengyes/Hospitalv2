@@ -18,6 +18,8 @@ int lowerBound;
 int upperBound;
 int docSkill=5;
 int docSkillRange=5;
+int totalPatients=0;
+int totalDead=0;
 
 Building building = new Building (4, 100, 600, 800, 20);
 void setup() {
@@ -62,12 +64,15 @@ void draw() {
   Patient newPatient = new Patient (0, 0, int(random(lowerBound, upperBound)), false, false, false, 300, 800);
   if (frameCount%influx==0 && (rightSeatAvailable && leftSeatAvailable)) {
     allPatients.add(newPatient);
+    totalPatients++;
   } else if (frameCount%influx==0 && (leftSeatAvailable)) {
     newPatient.searchingLeft=true;
+    totalPatients++;
     allPatients.add(newPatient);
   } else if (frameCount%influx==0 && rightSeatAvailable) {
     newPatient.searchingLeft=false;
     allPatients.add(newPatient);
+    totalPatients++;
   }
   
 
@@ -75,7 +80,9 @@ void draw() {
   cgLeft.display();
   cgRight.display();
   building.drawBuilding();
+  drawPercentageText();
   drawAllDead();
+  
   //println(allDoctors.get(0).currentPatient);
   //didn't use Doctor doctor:allDoctors as an iterator because of ConcurrentModificationException
   for (int i=0; i<allDoctors.size(); i++) {
@@ -163,22 +170,7 @@ void draw() {
       }
     }
 
-    //if(patient.chairIndex==-1 && patient.currentDoctor==null){
-    //  for (int g=0;g<leftGrid.length;g++){
-    //    if (patient.searchingLeft==true){
-    //      if(leftGrid[g]==false){
-
-    //        leftGrid[g]=true;
-    //        patient.chairIndex=g;
-    //        patient.hasSeat=true;
-    //        break;
-    //      }
-    //    }
-    //    else{
-
-    //    }
-    //  }
-    //}
+ 
 
     patient.updateColor();
     patient.updateSeverity();
@@ -292,7 +284,7 @@ void draw() {
       }
     } 
     else if (patient.isHealthy == true) {
-      patient.drawPa();
+      
       if (patient.patientX != building.pathWidth/2 + building.xWidth) {
         if (patient.patientX >300 ) {
           patient.patientX--;
@@ -328,6 +320,14 @@ void drawAllDead(){
   
 }
 
+void drawPercentageText(){
+  textSize(40);
+  if (totalPatients!=0){
+    text(str(round((float(totalDead)/totalPatients)*100))+"\u0025 "+"chance of death",100,700);
+    println(totalDead,totalPatients);
+  }
+}
+
 int docLower;
 int docUpper;
 void updateAllSkill(){
@@ -339,16 +339,17 @@ void updateAllSkill(){
     docLower=docSkill-docSkillRange;
   }
   if (docSkill+docSkillRange>9){
-    docUpper=10
+    docUpper=10;
   }
   else{
     docUpper=docSkill+docSkillRange; 
   }
   
   for (int i=0;i<allDoctors.size();i++){
-    allDoctors.get(i).skill=int(random(docLower,docUpper));
+    allDoctors.get(i).doctorSkill=int(random(docLower,docUpper));
       
   }
+  println(docLower,docUpper);
 }
 
 Patient checkMostInjured(){
