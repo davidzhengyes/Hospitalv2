@@ -80,5 +80,9 @@ class Patient {
     fill(patientColor);
     circle(patientX,patientY,15);
   }
+  
+  void moveUP(){
+    
+  }
 
 }

@@ -41,7 +41,7 @@ public void num_Docotor_Changer(GTextField source, GEvent event) { //_CODE_:num_
 } //_CODE_:num_Doctor:501931:
 
 public void patient_Influx_Slider(GCustomSlider source, GEvent event) { //_CODE_:patient_Influx:524675:
-  influx = patient_Influx.getValueI();
+  influx = 41-patient_Influx.getValueI();
 } //_CODE_:patient_Influx:524675:
 
 public void prioritize_Injuries_Checkbox(GCheckbox source, GEvent event) { //_CODE_:prioritize_Injuries:520254:
@@ -116,7 +116,7 @@ public void createGUI(){
   patient_Influx = new GCustomSlider(window1, 20, 100, 120, 60, "purple18px");
   patient_Influx.setShowValue(true);
   patient_Influx.setShowLimits(true);
-  patient_Influx.setLimits(5, 1, 10);
+  patient_Influx.setLimits(10, 1, 40);
   patient_Influx.setNbrTicks(10);
   patient_Influx.setStickToTicks(true);
   patient_Influx.setShowTicks(true);
@@ -137,7 +137,7 @@ public void createGUI(){
   Sim_Speed = new GCustomSlider(window1, 160, 100, 120, 60, "purple18px");
   Sim_Speed.setShowValue(true);
   Sim_Speed.setShowLimits(true);
-  Sim_Speed.setLimits(10, 10, 100);
+  Sim_Speed.setLimits(60, 10, 100);
   Sim_Speed.setNbrTicks(10);
   Sim_Speed.setStickToTicks(true);
   Sim_Speed.setShowTicks(true);
