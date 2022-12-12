@@ -56,16 +56,19 @@ class Patient {
   
   //methods
   
+  //sets colour based on injury severity, from 0-50 red is being increased, and 50-100 green gets decreased.
   void updateColor(){
     if (injurySeverity<=50 && injurySeverity < 100){
       this.patientColor = color(injurySeverity/50.0*255,255,0);
     }
     else if (injurySeverity>=100){
+      //if injury severity is greater than 100, add them to deadpatient list and unassign doctor and their patient
       deadP.add(new DeadPatient(int(this.patientX),int(this.patientY)));
       if(this.currentDoctor!=null){
         this.currentDoctor.currentPatient=null;
         this.currentDoctor=null;
       }
+      //removes the patient and changes statistics
       allPatients.remove(this);
       totalDead++;
       treatedPatients++;
@@ -74,7 +77,7 @@ class Patient {
     else{
       this.patientColor = color(255, (100-injurySeverity)/50.0*255,0);
     }
-    
+    //if they are healed remove them from doctor and make them healthy
     if(this.injurySeverity <= 0 && this.isHealthy==false &&this.currentDoctor!=null){
       treatedPatients++;
       totalTreatmentTime+=(frameCount-this.enterTime);

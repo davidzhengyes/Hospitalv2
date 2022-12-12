@@ -90,7 +90,14 @@ void draw() {
   //didn't use Doctor doctor:allDoctors as an iterator because of ConcurrentModificationException
   //loops through all doctors and draws them in rooms
   for (int i=0; i<allDoctors.size(); i++) {
-    Doctor doctor = allDoctors.get(i);
+    //in case number of doctors is changed while loop is running
+    Doctor doctor;
+    if(i<allDoctors.size()){
+      doctor = allDoctors.get(i);
+    }
+    else{
+      break;
+    }
 
 
     doctor.drawDr();
@@ -126,6 +133,7 @@ void draw() {
           mostInjuryPatient.currentDoctor=doctor;
           doctor.currentPatient=mostInjuryPatient;
           
+          //setting the chair they were just in to be empty
           if (mostInjuryPatient.searchingLeft==true && mostInjuryPatient.chairIndex!=-1) {
             leftGrid[mostInjuryPatient.chairIndex]=false;
           } 
@@ -150,10 +158,19 @@ void draw() {
   for (int i=0; i<allPatients.size(); i++) {
   //loops through all patients
     checktoDelete(); //checks whether or not they are off the screen to delete them
-
+    
     Boolean[] gridToSearch;
-    Patient patient = allPatients.get(i);
-
+    //little safeguard to prevent index out of range if allPatient array is suddenly changed
+    Patient patient;
+    if (i<allPatients.size()){
+      patient = allPatients.get(i);
+    }
+    else{
+      break;
+    }
+    
+    
+    
     //creates pointer to either left or right grid
     if (patient.searchingLeft==true && patient.chairIndex==-1) {
       gridToSearch=leftGrid;

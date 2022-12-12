@@ -17,7 +17,7 @@ class ChairGrid{
   }
 
 
-
+  //draws grid of chairs
   void display(){
     xStart=leftXpos;
     for (int i=0; i<chairNum+1; i++){
