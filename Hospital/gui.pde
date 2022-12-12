@@ -33,7 +33,7 @@ public void num_Docotor_Changer(GTextField source, GEvent event) { //_CODE_:num_
     building.numRooms = 36;
   }
  
-  if (int(num_Doctor.getText())!=0 && int(num_Doctor.getText())<=36){
+  if (int(num_Doctor.getText())!=0 && int(num_Doctor.getText())<=36 && int(num_Doctor.getText())!=building.numRooms){
     reset();
     building.numRooms = int(num_Doctor.getText());
   }
