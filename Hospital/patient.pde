@@ -1,5 +1,5 @@
 class Patient {
-  
+  //fields
   
   float injurySeverity;
   color patientColor;
@@ -24,7 +24,7 @@ class Patient {
   
   Doctor currentDoctor;
   
-   //constructor
+  //constructor
   Patient( float iS, boolean iH, boolean ss, float pX, float pY) {
     
    
@@ -54,6 +54,8 @@ class Patient {
     
   }
   
+  //methods
+  
   void updateColor(){
     if (injurySeverity<=50 && injurySeverity < 100){
       this.patientColor = color(injurySeverity/50.0*255,255,0);
@@ -79,11 +81,11 @@ class Patient {
       this.isHealthy = true;
       this.currentDoctor.currentPatient=null;
       this.currentDoctor=null;
-      
-  
+
     }
   }
   
+  //If the patient doesn't have a doctors, the patients injury will get worse
   void updateSeverity(){
     if (this.currentDoctor==null){
       
@@ -91,6 +93,7 @@ class Patient {
     }
   }
   
+  //Draws patients
   void drawPa(){
     fill(patientColor);
     circle(patientX,patientY,15);

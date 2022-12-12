@@ -1,6 +1,6 @@
+//consists of two grids, similar to tally marks
 class ChairGrid{
-  //consists of two grids, similar to tally marks
-  
+  //fields
   int leftXpos;
   int middleYpos;
   
@@ -8,6 +8,7 @@ class ChairGrid{
   
   int xStart;
   
+  //constructor
   ChairGrid(int x, int y,int c){
     this.leftXpos=x;
     this.middleYpos=y;
