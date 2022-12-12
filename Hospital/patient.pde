@@ -68,6 +68,17 @@ class Patient {
         this.currentDoctor.currentPatient=null;
         this.currentDoctor=null;
       }
+      //unoccupies chairs after death
+      if (this.searchingLeft==true){
+        if(this.chairIndex!=-1){
+          leftGrid[this.chairIndex]=false;
+        }
+      }
+      else{
+        if(this.chairIndex!=-1){
+          rightGrid[this.chairIndex]=false;
+        }
+      }
       //removes the patient and changes statistics
       allPatients.remove(this);
       treatedPatients++;

@@ -10,6 +10,7 @@ ChairGrid cgRight = new ChairGrid(370, 666, 12);
 
 Boolean[] leftGrid = new Boolean[cgLeft.chairNum*2];
 Boolean[] rightGrid = new Boolean [cgRight.chairNum*2];
+//arrays for chair grid, false is unoccupied
 Boolean prioritizeInjury=false;
 
 int influx=20;
