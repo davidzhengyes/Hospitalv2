@@ -73,7 +73,7 @@ class Patient {
       this.patientColor = color(255, (100-injurySeverity)/50.0*255,0);
     }
     
-    if(this.injurySeverity <= 0 && this.isHealthy==false){
+    if(this.injurySeverity <= 0 && this.isHealthy==false &&this.currentDoctor!=null){
       treatedPatients++;
       totalTreatmentTime+=(frameCount-this.enterTime);
       this.isHealthy = true;
