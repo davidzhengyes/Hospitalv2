@@ -32,6 +32,14 @@ public void num_Docotor_Changer(GTextField source, GEvent event) { //_CODE_:num_
   if (int(num_Doctor.getText())>36){
     building.numRooms = 36;
   }
+  else if (int(num_Doctor.getText())<1){
+    print(num_Doctor.getText());
+    reset();
+    building.numRooms=2;
+  }
+  else{
+    building.numRooms=1;
+  }
  
   if (int(num_Doctor.getText())!=0 && int(num_Doctor.getText())<=36 && int(num_Doctor.getText())!=building.numRooms){
     reset();
@@ -118,9 +126,9 @@ public void createGUI(){
   label2.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label2.setText("Doctor Heal Speed");
   label2.setOpaque(false);
-  label3 = new GLabel(HospitalControls, 300, 0, 120, 20);
+  label3 = new GLabel(HospitalControls, 290, 0, 140, 20);
   label3.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label3.setText("Num of Doctors");
+  label3.setText("Num of Doctors (1-36)");
   label3.setOpaque(false);
   num_Doctor = new GTextField(HospitalControls, 300, 20, 120, 60, G4P.SCROLLBARS_NONE);
   num_Doctor.setPromptText("Enter a Number");
