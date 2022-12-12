@@ -196,8 +196,8 @@ public void createGUI(){
   injuryAvg = new GCustomSlider(HospitalControls, 300, 180, 120, 60, "purple18px");
   injuryAvg.setShowValue(true);
   injuryAvg.setShowLimits(true);
-  injuryAvg.setLimits(5, 1, 10);
-  injuryAvg.setNbrTicks(10);
+  injuryAvg.setLimits(5, 1, 9);
+  injuryAvg.setNbrTicks(9);
   injuryAvg.setStickToTicks(true);
   injuryAvg.setShowTicks(true);
   injuryAvg.setNumberFormat(G4P.INTEGER, 0);

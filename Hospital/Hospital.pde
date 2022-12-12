@@ -53,13 +53,13 @@ void draw() {
   else{
     lowerBound=avgInjury*10-injuryRange*5;
   }
-  if (avgInjury*10+injuryRange*5>=99){
-    upperBound=99;
+  if (avgInjury*10+injuryRange*5>=90){
+    upperBound=90;
   }
   else{
     upperBound=avgInjury*10+injuryRange*5; 
   }
- 
+   println(deadP.size(),totalPatients);
   //makes a new patient and decides whether to add the patient to the screen or not depending on whether there are seats avaialble
   Patient newPatient = new Patient ( int(random(lowerBound, upperBound)), false, false, 300, 800);
   if (frameCount%influx==0 && (rightSeatAvailable && leftSeatAvailable)) {
@@ -83,7 +83,7 @@ void draw() {
   drawPercentageText();
 
   drawAverageTime();
-
+  totalDead=deadP.size();
   drawAllDead();
   
  
@@ -425,7 +425,10 @@ void drawAverageTime(){
 //clears everything and creates new building and grid
 void reset() {
   noLoop();
-
+  totalTreatmentTime=0;
+  treatedPatients=0;
+  totalDead=0;
+  totalPatients=0;
   allDoctors = new ArrayList<Doctor>();
   allPatients = new ArrayList<Patient>();
   deadP = new ArrayList<DeadPatient>();

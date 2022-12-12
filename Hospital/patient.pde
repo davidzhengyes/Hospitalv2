@@ -70,7 +70,6 @@ class Patient {
       }
       //removes the patient and changes statistics
       allPatients.remove(this);
-      totalDead++;
       treatedPatients++;
       totalTreatmentTime+=(frameCount-this.enterTime);
     }
