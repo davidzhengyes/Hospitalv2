@@ -1,16 +1,18 @@
-//Global Variables
+//Global Variables - Do not change
 ArrayList<Doctor> allDoctors = new ArrayList<Doctor>();
 ArrayList<Patient> allPatients = new ArrayList<Patient>();
 ArrayList<DeadPatient> deadP = new ArrayList<DeadPatient>();
 import g4p_controls.*;
 PImage img;
-//s
+
 ChairGrid cgLeft = new ChairGrid(50, 666, 12);
 ChairGrid cgRight = new ChairGrid(370, 666, 12);
+
 Boolean[] leftGrid = new Boolean[cgLeft.chairNum*2];
 Boolean[] rightGrid = new Boolean [cgRight.chairNum*2];
-int influx=20;
 Boolean prioritizeInjury=false;
+
+int influx=20;
 int injuryCoeff;
 int avgInjury=5;
 int injuryRange=10;
@@ -24,12 +26,10 @@ int treatedPatients=0;
 int totalTreatmentTime;
 
 Building building = new Building (4, 100, 600, 800, 20);
+
+//Setup Function - draws basic hospital with rooms and waiting area and creates the GUI
 void setup() {
-  //img = loadImage ("yep.jpg");
   size(600, 800);
-
-
-
 
   createGUI();
   building.createBuilding();
@@ -40,7 +40,7 @@ void setup() {
   }
 }
 
-
+//Draw Function
 void draw() {
   //checks if there are seats available
   Boolean leftSeatAvailable = checkForOpenSeats(leftGrid);
@@ -60,22 +60,22 @@ void draw() {
     upperBound=avgInjury*10+injuryRange*5; 
   }
  
-  //makes a new patient and decides whether to add or not depending on whether there are seats avaialble, and increases total patient count.
+  //makes a new patient and decides whether to add the patient to the screen or not depending on whether there are seats avaialble
   Patient newPatient = new Patient ( int(random(lowerBound, upperBound)), false, false, 300, 800);
   if (frameCount%influx==0 && (rightSeatAvailable && leftSeatAvailable)) {
     allPatients.add(newPatient);
-    totalPatients++;
+    totalPatients++; //increases total patient count
   } else if (frameCount%influx==0 && (leftSeatAvailable)) {
     newPatient.searchingLeft=true;
-    totalPatients++;
+    totalPatients++; //increases total patient count
     allPatients.add(newPatient);
   } else if (frameCount%influx==0 && rightSeatAvailable) {
     newPatient.searchingLeft=false;
     allPatients.add(newPatient);
-    totalPatients++;
+    totalPatients++; //increases total patient count
   }
   
-  //draws everything
+  //Redraws hospital graphics, live patients, doctors, dead patient markers and statistics each frame
   background(210);
   cgLeft.display();
   cgRight.display();
@@ -88,19 +88,19 @@ void draw() {
   
  
   //didn't use Doctor doctor:allDoctors as an iterator because of ConcurrentModificationException
-  //loops through doctors
+  //loops through all doctors and draws them in rooms
   for (int i=0; i<allDoctors.size(); i++) {
     Doctor doctor = allDoctors.get(i);
 
 
     doctor.drawDr();
-    if (doctor.currentPatient == null) { //if room is empty
+    if (doctor.currentPatient == null) { //if the room is empty, as in there is no current patient
       
       if (!prioritizeInjury){
-      //looping through all patients and seeing if they dont have a doctor, and assigning them to each other
+      //looping through all patients and seeing if they have a doctor. If they don't doctos are assigned patients and vice versa
         for (int g=0; g<allPatients.size(); g++) {
   
-          //pick patient depending on how far up they are in the list of allPatients
+          //picks patient depending on how far up they are in the list of allPatients
           if (allPatients.get(g).currentDoctor == null && allPatients.get(g).isHealthy==false ) {
             allPatients.get(g).currentDoctor = doctor;
             doctor.currentPatient = allPatients.get(g);
@@ -138,7 +138,7 @@ void draw() {
         
       }
     } 
-    //if patient has doctor, heal the patient
+    //if the patient has a doctor they heal the patient
     else {
       if (doctor.currentPatient.reachedDoctor) {
         doctor.healPatient();
@@ -149,7 +149,7 @@ void draw() {
   //not using Patient patient:allPatients same reason as doctors
   for (int i=0; i<allPatients.size(); i++) {
   //loops through all patients
-    checktoDelete();
+    checktoDelete(); //checks whether or not they are off the screen to delete them
 
     Boolean[] gridToSearch;
     Patient patient = allPatients.get(i);
@@ -182,11 +182,11 @@ void draw() {
     patient.updateSeverity();
 
 
-    if (patient.isHealthy == false) {//need if here, if patient is not already healed
+    if (patient.isHealthy == false) { //if patient is not fully healed
       patient.drawPa();
 
       
-        //movement for after they have a doctor
+      //move to enter hallway,once same height as doctor enters treatment room
       if (patient.currentDoctor != null) {
         if (patient.patientX == building.pathWidth/2 + building.xWidth || patient.patientY < 550) {
           if (patient.patientY == patient.currentDoctor.yPos) {
@@ -202,7 +202,7 @@ void draw() {
             }
           } 
           else {
-            //if not at same height keep going up
+            //if not at same height as doctor keep going up
             patient.patientY--;
           }
         } 
@@ -294,6 +294,7 @@ void draw() {
     else if (patient.isHealthy == true) {
       patient.drawPa();
       
+      //Enters hallway
       if (patient.patientX != building.pathWidth/2 + building.xWidth) {
         if (patient.patientX >300 ) {
           patient.patientX--;
@@ -302,7 +303,7 @@ void draw() {
           patient.patientX++;
         }
       } 
-      else {
+      else { //moves up and out of building
         patient.patientY--;
       }
     }
@@ -321,6 +322,7 @@ Boolean checkForOpenSeats(Boolean [] grid) {
   return false;
 }
 
+//Draws markers where patients have died
 void drawAllDead(){
   for(DeadPatient dp:deadP){
     fill(0);
@@ -329,6 +331,7 @@ void drawAllDead(){
   
 }
 
+//Draws chance of death statistic at bottom of screen
 void drawPercentageText(){
   textSize(40);
   if (totalPatients!=0){
@@ -382,6 +385,7 @@ Patient checkMostInjured(){
   return maxInjured;
 }
 
+//Checks if pateints have moved off of the screen, if so they are deleted
 void checktoDelete() {
   for (int i=0; i<allPatients.size(); i++) {
     if (allPatients.get(i).patientY < 0) {
@@ -390,6 +394,7 @@ void checktoDelete() {
   }
 }
 
+//Draws average treatment time statistic
 void drawAverageTime(){
   textSize(40);
   if (treatedPatients!=0){
@@ -400,9 +405,10 @@ void drawAverageTime(){
   
 }
 
+//clears everything and creates new building and grid
 void reset() {
   noLoop();
-  //clears everything and creates new building and grid
+
   allDoctors = new ArrayList<Doctor>();
   allPatients = new ArrayList<Patient>();
   deadP = new ArrayList<DeadPatient>();

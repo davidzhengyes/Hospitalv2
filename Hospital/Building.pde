@@ -1,4 +1,5 @@
 class Building{
+  //fields
   int numRooms;
   int pathWidth;
   
@@ -14,7 +15,7 @@ class Building{
   
   ArrayList <Room> rooms = new ArrayList <Room>();
   
-  
+  //constructor
   Building(int r,int p,int w, int l, int dw){
     this.numRooms = r;
     this.pathWidth=p;
@@ -26,6 +27,7 @@ class Building{
     
     
   }
+  
   //makes new building and room coordinates
   void createBuilding(){
     rooms = new ArrayList <Room>();
@@ -46,7 +48,7 @@ class Building{
           currRoom.xPos = width-(width-this.pathWidth)/2;
         }
         
-        allDoctors.add(new Doctor((currRoom.xPos+this.xWidth)-(this.xWidth/2), (currRoom.yPos+this.yWidth)-(this.yWidth/2)));
+        allDoctors.add(new Doctor((currRoom.xPos+this.xWidth)-(this.xWidth/2), (currRoom.yPos+this.yWidth)-(this.yWidth/2))); //adds a doctor to each room
       }
     
     }
