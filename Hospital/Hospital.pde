@@ -351,7 +351,7 @@ void drawAllDead(){
 
 //Draws chance of death statistic at bottom of screen
 void drawPercentageText(){
-  textSize(40);
+  textSize(30);
   if (totalPatients!=0){
     fill(255);
     textAlign(LEFT);
@@ -414,7 +414,7 @@ void checktoDelete() {
 
 //Draws average treatment time statistic
 void drawAverageTime(){
-  textSize(40);
+  textSize(30);
   if (treatedPatients!=0){
     fill(255);
     textAlign(LEFT);
