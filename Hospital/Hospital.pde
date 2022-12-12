@@ -59,7 +59,7 @@ void draw() {
   else{
     upperBound=avgInjury*10+injuryRange*5; 
   }
-   println(deadP.size(),totalPatients);
+   
   //makes a new patient and decides whether to add the patient to the screen or not depending on whether there are seats avaialble
   Patient newPatient = new Patient ( int(random(lowerBound, upperBound)), false, false, 300, 800);
   if (frameCount%influx==0 && (rightSeatAvailable && leftSeatAvailable)) {
